@@ -45,8 +45,7 @@ RUN mkdir /tmp/kustomize \
 # Install Conftest (https://www.conftest.dev/)
 RUN mkdir /tmp/conftest \
   && curl -L -o /tmp/conftest/conftest.tar.gz \
-  https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz \
-  https://github.com/instrumenta/conftest/releases/download/v${CONFTEST_VERSION}/conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz
+  https://github.com/instrumenta/conftest/releases/download/v${CONFTEST_VERSION}/conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz \
   && tar xf /tmp/conftest/conftest.tar.gz -C /tmp/conftest \
   && mv /tmp/conftest/conftest /usr/local/bin \
   && chmod +x /usr/local/bin/conftest \
