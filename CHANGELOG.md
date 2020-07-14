@@ -1,3 +1,7 @@
+v2.2
+----
+* Create latest tag on Docker hub
+
 v2.1
 ----
 
