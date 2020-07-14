@@ -1,9 +1,10 @@
-FROM python:3.8.2-alpine3.11
+FROM python:3.8.4-alpine3.12
+# https://hub.docker.com/_/python
 
-ARG APP_VERSION=2.0
+ARG APP_VERSION=2.1
 
 # https://github.com/kubernetes/kubectl/releases
-ARG KUBECTL_VERSION=1.18.2
+ARG KUBECTL_VERSION=1.18.5
 
 # https://github.com/instrumenta/kubeval/releases
 ARG KUBEVAL_VERSION=0.15.0
@@ -12,10 +13,10 @@ ARG KUBEVAL_VERSION=0.15.0
 ARG YAMLLINT_VERSION=1.23.0
 
 # https://github.com/kubernetes-sigs/kustomize/releases
-ARG KUSTOMIZE_VERSION=3.5.4
+ARG KUSTOMIZE_VERSION=3.8.0
 
-# https://github.com/instrumenta/conftest/releases
-ARG CONFTEST_VERSION=0.18.1
+# https://github.com/open-policy-agent/conftest/releases
+ARG CONFTEST_VERSION=0.19.0
 
 # split layers into distinct components
 RUN apk add --no-cache ca-certificates curl
@@ -45,7 +46,7 @@ RUN mkdir /tmp/kustomize \
 # Install Conftest (https://www.conftest.dev/)
 RUN mkdir /tmp/conftest \
   && curl -L -o /tmp/conftest/conftest.tar.gz \
-  https://github.com/instrumenta/conftest/releases/download/v${CONFTEST_VERSION}/conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz \
+  https://github.com/open-policy-agent/conftest/releases/download/v${CONFTEST_VERSION}/conftest_${CONFTEST_VERSION}_Linux_x86_64.tar.gz \
   && tar xf /tmp/conftest/conftest.tar.gz -C /tmp/conftest \
   && mv /tmp/conftest/conftest /usr/local/bin \
   && chmod +x /usr/local/bin/conftest \
