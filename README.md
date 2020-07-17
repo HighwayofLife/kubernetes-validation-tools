@@ -52,3 +52,12 @@ KubeCTL
 $ kubectl create --dry-run --validate -f invalid.yaml
 ```
 
+Config-Lint
+-----------
+
+[config-lint](https://stelligent.github.io/config-lint/) is a command line tool to validate configuration files using rules specified in YAML. The configuration files can be one of several formats: Terraform, JSON, YAML, with support for Kubernetes. There are built-in rules provided for Terraform, and custom files can be used for other formats.
+
+```sh
+config-lint -rules example-files/rules/kubernetes.yml example-files/config
+```
+
