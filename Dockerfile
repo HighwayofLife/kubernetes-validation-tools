@@ -4,19 +4,22 @@ FROM python:3.8.4-alpine3.12
 ARG APP_VERSION=2.1
 
 # https://github.com/kubernetes/kubectl/releases
-ARG KUBECTL_VERSION=1.18.5
+ARG KUBECTL_VERSION=1.18.6
 
 # https://github.com/instrumenta/kubeval/releases
 ARG KUBEVAL_VERSION=0.15.0
 
 # https://pypi.org/project/yamllint/
-ARG YAMLLINT_VERSION=1.23.0
+ARG YAMLLINT_VERSION=1.24.2
 
 # https://github.com/kubernetes-sigs/kustomize/releases
-ARG KUSTOMIZE_VERSION=3.8.0
+ARG KUSTOMIZE_VERSION=3.8.1
 
 # https://github.com/open-policy-agent/conftest/releases
-ARG CONFTEST_VERSION=0.19.0
+ARG CONFTEST_VERSION=0.20.0
+
+# https://github.com/stelligent/config-lint/releases
+ARG CONFIG_LINT_VERSION=1.6.0
 
 # split layers into distinct components
 RUN apk add --no-cache ca-certificates curl
@@ -51,6 +54,15 @@ RUN mkdir /tmp/conftest \
   && mv /tmp/conftest/conftest /usr/local/bin \
   && chmod +x /usr/local/bin/conftest \
   && rm -rf /tmp/conftest
+
+# Install Config Lint (https://stelligent.github.io/config-lint/#/install)
+RUN mkdir /tmp/config-lint \
+  && curl -L -o /tmp/config-lint/config-lint.tar.gz \
+  https://github.com/stelligent/config-lint/releases/download/v${CONFIG_LINT_VERSION}/config-lint_Linux_x86_64.tar.gz \
+  && tar xf /tmp/config-lint/config-lint.tar.gz -C /tmp/config-lint \
+  && mv /tmp/config-lint/config-lint /usr/local/bin \
+  && chmod +x /usr/local/bin/config-lint \
+  && rm -rf /tmp/config-lint
 
 # Install Kubectl
 RUN curl -o /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl \

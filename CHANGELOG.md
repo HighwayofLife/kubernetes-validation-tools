@@ -1,3 +1,11 @@
+v2.3
+----
+* 🚀 [NEW] Added [Config-lint](https://stelligent.github.io/config-lint/#/?id=%f0%9f%94%8d-config-lint-%f0%9f%94%8e), A CLI tool to validate config files (JSON, Terraform, YAML + Kubernetes), using rules specified in YAML.
+* 📝 Updated Kubectl to [v1.18.6](https://kubernetes.io/docs/setup/release/notes/)
+* 📝 Updated YAMLLint to [v1.24.2](https://github.com/adrienverge/yamllint/blob/master/CHANGELOG.rst)
+* 📝 Updated Kustomize to [v3.8.1](https://github.com/kubernetes-sigs/kustomize/releases/tag/kustomize%2Fv3.8.1)
+* 📝 Updated Conftest to [v0.20.0](https://github.com/open-policy-agent/conftest/releases/tag/v0.20.0)
+
 v2.2
 ----
 * Create latest tag on Docker hub
@@ -20,3 +28,4 @@ v2.0
 * Updated YamlLint to v1.23
 * Updated Kustomize to v3.5.4
 * Added ConfTest v0.18.1
+
