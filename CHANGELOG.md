@@ -1,3 +1,13 @@
+v2.4
+----
+* 📝 Updated base Python to [v3.9.1-alpine3.12](https://hub.docker.com/layers/python/library/python/3.9.1/images/sha256-758539bea3c58d4b0bf09bfa97c633cd657599e58648f5eb791b25d95cb854c2?context=explore)
+* 📝 Updated Kubectl to [v1.20.0](https://github.com/kubernetes/kubectl/releases/tag/kubernetes-1.20.2)
+* 📝 Updated Kubeval to [v1.15.0](https://github.com/instrumenta/kubeval/releases/tag/0.15.0)
+* 📝 Updated YAMLLint to [v1.25.0](https://pypi.org/project/yamllint/)
+* 📝 Updated Kustomize to [v3.9.2](https://github.com/kubernetes-sigs/kustomize/releases/tag/kustomize%2Fv3.9.2)
+* 📝 Updated Conftest to [v0.23.0](https://github.com/open-policy-agent/conftest/releases/tag/v0.23.0)
+* 📝 Updated Config-Lint to [v1.6.0](https://github.com/stelligent/config-lint/releases/tag/v1.6.0)
+
 v2.3
 ----
 * 🚀 [NEW] Added [Config-lint](https://stelligent.github.io/config-lint/#/?id=%f0%9f%94%8d-config-lint-%f0%9f%94%8e), A CLI tool to validate config files (JSON, Terraform, YAML + Kubernetes), using rules specified in YAML.
