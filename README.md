@@ -21,7 +21,19 @@ Ideally the kubeval-tools container should be used in a CI process to validate a
 
 Tools List
 ----------
-
+| Tool        | Version | Purpose    | Description                                                                       |
+|-------------|---------|------------|-----------------------------------------------------------------------------------|
+| Kubectl     | 1.21.1  | CLI        | Kubernetes CLI. Can be used with `--dry-run=client` to validate manifests         |
+| Yamllint    | 1.26.0  | Linter     | Basic linter for YAML files                                                       |
+| Kubeval     | 0.16.1  | Validation | Tool for validating a Kubernetes YAML manifests. Doesn't work with CRDs.          |
+| Kustomize   | 4.1.0   | Compile    | Template-free way to customize app configs. Useful to validate kustomize configs. |
+| Config Lint | 1.6.0   | Validation | Validate config files using custom rules specified in YAML.                       |
+| Conftest    | 0.25.0  | Tests      | Utility to help you write tests against structured configuration data.            |
+| Kube Score  | 1.11.0  | Security   | Tool that performs **static code analysis** of Kubernetes object definitions.     |
+| Polaris     | 3.2.1   | Validation | Identifies Kubernetes deployment configuration errors                             |
+| Kube Linter | 0.2.1   | Security   | Linter and Static analysis tool that checks Kubernetes manifests                  |
+| Kubeconform | 0.4.7   | Validation | Kubernetes manifests validation tool like Kubeval with CRD support                |
+| Kubeaudit   | 0.14.0  | Security   | Audit clusters or manifest files for security concerns                            |
 
 Kubeaudit
 ---------
