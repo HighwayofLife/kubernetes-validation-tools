@@ -1,22 +1,22 @@
-FROM python:3.8.4-alpine3.12
+FROM python:3.9.1-alpine3.12
 # https://hub.docker.com/_/python
 
-ARG APP_VERSION=2.1
+ARG APP_VERSION=2.4
 
 # https://github.com/kubernetes/kubectl/releases
-ARG KUBECTL_VERSION=1.18.6
+ARG KUBECTL_VERSION=1.20.0
 
 # https://github.com/instrumenta/kubeval/releases
 ARG KUBEVAL_VERSION=0.15.0
 
 # https://pypi.org/project/yamllint/
-ARG YAMLLINT_VERSION=1.24.2
+ARG YAMLLINT_VERSION=1.25.0
 
 # https://github.com/kubernetes-sigs/kustomize/releases
-ARG KUSTOMIZE_VERSION=3.8.1
+ARG KUSTOMIZE_VERSION=3.9.2
 
 # https://github.com/open-policy-agent/conftest/releases
-ARG CONFTEST_VERSION=0.20.0
+ARG CONFTEST_VERSION=0.23.0
 
 # https://github.com/stelligent/config-lint/releases
 ARG CONFIG_LINT_VERSION=1.6.0
@@ -69,4 +69,3 @@ RUN curl -o /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-rel
     && chmod +x /usr/local/bin/kubectl
 
 CMD ["/bin/sh"]
-
