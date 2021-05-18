@@ -3,6 +3,8 @@ Kubernetes Validation Tools
 
 An all-in-one collection of tools to run linting, common validation, static code analysis, security scanning, configuration tests, auditing, kustomize build, and dry run configuration for structured Kubernetes YAML Manifests. Designed to run in a CI (Continuious Integration) process as part of validation and testing, especially useful for Kubernetes clusters that are managed through GitOps.
 
+[![Docker](https://github.com/HighwayofLife/kubernetes-validation-tools/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/HighwayofLife/kubernetes-validation-tools/actions/workflows/docker-publish.yml)
+
 Why?
 ----
 
@@ -11,10 +13,10 @@ I wasn't able to find a single docker image that contained all of the major vali
 Usage
 -----
 
-Grab the latest image from Docker hub: [Deck15/kubeval-tools](https://hub.docker.com/r/deck15/kubeval-tools)
+Grab the latest image from [Github Packages](https://github.com/HighwayofLife?tab=packages&repo_name=kubernetes-validation-tools)
 
 ```sh
-docker run --rm -it deck15/kubeval-tools /bin/sh
+docker run --rm -it docker.pkg.github.com/highwayoflife/kubernetes-validation-tools/image:2.5 /bin/bash
 ```
 
 Ideally the kubeval-tools container should be used in a CI process to validate and lint Kubernetes configs and manifests. It's optimal to run these tools as part of a [GitOps](https://www.gitops.tech/) CI workflow.

@@ -1,7 +1,7 @@
 v2.5
 ----
 
-### Features 🚀 
+### Features 🚀
 
 * 🚀  **[NEW]** Added **[Kubeconform](https://github.com/yannh/kubeconform)**, a Kubernetes manifests validation tool.
 
@@ -9,11 +9,15 @@ It is inspired by, contains code from and is designed to stay close to Kubeval, 
 
 * high performance: will validate & download manifests over multiple routines, caching downloaded files in memory
 * configurable list of remote, or local schemas locations, enabling validating Kubernetes custom resources (CRDs) and offline validation capabilities
-* uses by default a self-updating fork of the schemas registry maintained by the kubernetes-json-schema project - which guarantees up-to-date schemas for all recent versions of Kubernetes. 
+* uses by default a self-updating fork of the schemas registry maintained by the kubernetes-json-schema project - which guarantees up-to-date schemas for all recent versions of Kubernetes.
 
 * 🚀  **[NEW]** Added **[Kubeaudit](https://github.com/Shopify/kubeaudit)**, a command line tool and a Go package to audit Kubernetes clusters for various different security concerns.
 
-### Updates 📝 
+### Additions
+* Install Kubeconform [v0.4.7](https://github.com/yannh/kubeconform/releases/tag/v0.4.7)
+* Install Kubeaudit [v0.14.0](https://github.com/Shopify/kubeaudit/releases/tag/v0.14.0)
+
+### Updates 📝
 * Update Python from 3.9.0 to 3.9.5 on Alpine 3.13
 * Update Kubectl from 1.19.3 to [v1.21.1](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.21.md), now installed via [Alpine package manager](https://pkgs.alpinelinux.org/package/edge/testing/x86_64/kubectl)
 * Update Yamllint from 1.25.0 to [1.26.0](https://github.com/adrienverge/yamllint/blob/master/CHANGELOG.rst#1260-2021-01-29)
@@ -22,7 +26,6 @@ It is inspired by, contains code from and is designed to stay close to Kubeval, 
 * Update Kube-Score to [v1.11.0](https://github.com/zegl/kube-score/releases/tag/v1.11.0)
 * Update Polaris to [3.2.1](https://github.com/FairwindsOps/polaris/releases/tag/3.2.1)
 * Update Kube-Linter to [0.2.1](https://github.com/stackrox/kube-linter/releases/tag/0.2.1)
-* Install Kubeconform [v0.4.7](https://github.com/yannh/kubeconform/releases/tag/v0.4.7)
 
 
 v2.4
