@@ -150,3 +150,7 @@ Kube Linter
 [Kube Linter](https://github.com/stackrox/kube-linter) is a static analysis tool that checks Kubernetes YAML files and Helm charts to ensure the applications represented in them adhere to best practices. KubeLinter accepts YAML files as input and runs a series of checks on them. If it finds any issues, it reports them and returns a non-zero exit code.
 
 
+Contributing
+------------
+
+PRs welcome! Check out the [CONTRIBUTING](CONTRIBUTING.md) Guidelines for more information.
