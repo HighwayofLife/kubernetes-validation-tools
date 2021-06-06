@@ -30,6 +30,9 @@ ARG KUBECONFORM_VERSION=0.4.7
 # https://github.com/Shopify/kubeaudit/releases
 ARG KUBEAUDIT_VERSION=0.14.0
 
+# https://github.com/datreeio/datree/releases
+ARG DATREE_VERSION=0.1.382
+
 # split layers into distinct components
 # Install yamllint and kubectl via the alpine packages repositories
 RUN apk add --no-cache --upgrade bash ca-certificates curl tar yamllint \
@@ -115,6 +118,15 @@ RUN mkdir /tmp/kube-linter \
   && mv /tmp/kube-linter/kube-linter /usr/local/bin \
   && chmod +x /usr/local/bin/kube-linter \
   && rm -rf /tmp/kube-linter
+
+# Install Datree (https://github.com/datreeio/datree)
+RUN mkdir /tmp/datree \
+  && curl -L -o /tmp/datree/datree.zip \
+  https://github.com/datreeio/datree/releases/download/${DATREE_VERSION}/datree-cli_${DATREE_VERSION}_Linux_x86_64.zip \
+  && unzip /tmp/datree/datree.zip -d /tmp/datree/ \
+  && mv /tmp/datree/datree /usr/local/bin \
+  && chmod +x /usr/local/bin/datree \
+  && rm -rf /tmp/datree 
 
 CMD ["/bin/bash"]
 
