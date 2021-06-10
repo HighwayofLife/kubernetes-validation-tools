@@ -23,19 +23,20 @@ Ideally the kubeval-tools container should be used in a CI process to validate a
 
 Tools List
 ----------
-| Tool        | Version | Purpose    | Description                                                                       |
-|-------------|---------|------------|-----------------------------------------------------------------------------------|
-| Kubectl     | 1.21.1  | CLI        | Kubernetes CLI. Can be used with `--dry-run=client` to validate manifests         |
-| Yamllint    | 1.26.0  | Linter     | Basic linter for YAML files                                                       |
-| Kubeval     | 0.16.1  | Validation | Tool for validating a Kubernetes YAML manifests. Doesn't work with CRDs.          |
-| Kustomize   | 4.1.0   | Compile    | Template-free way to customize app configs. Useful to validate kustomize configs. |
-| Config Lint | 1.6.0   | Validation | Validate config files using custom rules specified in YAML.                       |
-| Conftest    | 0.25.0  | Tests      | Utility to help you write tests against structured configuration data.            |
-| Kube Score  | 1.11.0  | Security   | Tool that performs **static code analysis** of Kubernetes object definitions.     |
-| Polaris     | 3.2.1   | Validation | Identifies Kubernetes deployment configuration errors                             |
-| Kube Linter | 0.2.1   | Security   | Linter and Static analysis tool that checks Kubernetes manifests                  |
-| Kubeconform | 0.4.7   | Validation | Kubernetes manifests validation tool like Kubeval with CRD support                |
-| Kubeaudit   | 0.14.0  | Security   | Audit clusters or manifest files for security concerns                            |
+| Tool        | Version  | Purpose    | Description                                                                       |
+|-------------|----------|------------|-----------------------------------------------------------------------------------|
+| Kubectl     | 1.21.1   | CLI        | Kubernetes CLI. Can be used with `--dry-run=client` to validate manifests         |
+| Yamllint    | 1.26.0   | Linter     | Basic linter for YAML files                                                       |
+| Kubeval     | 0.16.1   | Validation | Tool for validating a Kubernetes YAML manifests. Doesn't work with CRDs.          |
+| Kustomize   | 4.1.0    | Compile    | Template-free way to customize app configs. Useful to validate kustomize configs. |
+| Config Lint | 1.6.0    | Validation | Validate config files using custom rules specified in YAML.                       |
+| Conftest    | 0.25.0   | Tests      | Utility to help you write tests against structured configuration data.            |
+| Kube Score  | 1.11.0   | Security   | Tool that performs **static code analysis** of Kubernetes object definitions.     |
+| Polaris     | 3.2.1    | Validation | Identifies Kubernetes deployment configuration errors                             |
+| Kube Linter | 0.2.1    | Security   | Linter and Static analysis tool that checks Kubernetes manifests                  |
+| Kubeconform | 0.4.7    | Validation | Kubernetes manifests validation tool like Kubeval with CRD support                |
+| Kubeaudit   | 0.14.0   | Security   | Audit clusters or manifest files for security concerns                            |
+| Datree      | 0.1.382  | Policy     | Ensure Kubernetes manifests and Helm charts are valid and follow your policies.   |
 
 Kubeaudit
 ---------
@@ -163,6 +164,22 @@ Kube Linter
 
 [Kube Linter](https://github.com/stackrox/kube-linter) is a static analysis tool that checks Kubernetes YAML files and Helm charts to ensure the applications represented in them adhere to best practices. KubeLinter accepts YAML files as input and runs a series of checks on them. If it finds any issues, it reports them and returns a non-zero exit code.
 
+Datree
+-----------
+
+[Datree](https://github.com/datreeio/datree) is a CLI tool that can be used locally or in your CI/CD to ensure Kubernetes manifests and Helm charts follow best practices as well as your organization’s policies. It comes with 30 battle-tested rules to choose from, together with built-in support for YAML and kubernetes schema validation.  
+
+#### Example with static YAMLs
+```sh
+datree test my-app/*.yaml
+datree test my-app/deployment.yaml
+```
+
+#### Example with Helm
+_First, you need to install [Datree's helm plugin](https://hub.datree.io/helm-plugin)_
+```sh
+helm datree test <CHART_DIRECTORY>
+```
 
 Contributing
 ------------
