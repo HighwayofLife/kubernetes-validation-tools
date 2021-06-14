@@ -26,6 +26,7 @@ Tools List
 | Tool        | Version  | Purpose    | Description                                                                       |
 |-------------|----------|------------|-----------------------------------------------------------------------------------|
 | Kubectl     | 1.21.1   | CLI        | Kubernetes CLI. Can be used with `--dry-run=client` to validate manifests         |
+| Helm        | 3.6.0    | CLI        | Helm helps you manage Kubernetes applications — define, install, and upgrade  Kubernetes applications as helm charts. Run as a validation tool, can be run as `helm lint`, or `helm template`. |
 | Yamllint    | 1.26.0   | Linter     | Basic linter for YAML files                                                       |
 | Kubeval     | 0.16.1   | Validation | Tool for validating a Kubernetes YAML manifests. Doesn't work with CRDs.          |
 | Kustomize   | 4.1.0    | Compile    | Template-free way to customize app configs. Useful to validate kustomize configs. |
@@ -84,6 +85,29 @@ KubeCTL
 ```sh
 $ kubectl create --dry-run --validate -f invalid.yaml
 ```
+
+Helm
+----
+
+Helm commands to use in CI to lint or validate helm charts.
+
+#### helm lint
+examine a chart for possible issues.
+
+**NOTE:** 
+> `helm lint` by itself is insufficient to adequately validate a helm chart. It is recommended to use `helm lint` and `helm template` in combination with one of the other manifest validation tools. (See below example)
+
+This command takes a path to a chart and runs a series of tests to verify that the chart is well-formed.
+
+If the linter encounters things that will cause the chart to fail installation, it will emit `[ERROR]` messages. If it encounters issues that break with convention or recommendation, it will emit `[WARNING]` messages.
+
+```sh
+helm lint PATH [flags]
+```
+
+#### helm template with kubeconform 
+```sh
+helm template ./path/to/chart | kubeconform -strict -ignore-missing-schemas
 
 Config-Lint
 -----------
@@ -176,7 +200,6 @@ datree test my-app/deployment.yaml
 ```
 
 #### Example with Helm
-_First, you need to install [Datree's helm plugin](https://hub.datree.io/helm-plugin)_
 ```sh
 helm datree test <CHART_DIRECTORY>
 ```

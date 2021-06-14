@@ -1,13 +1,13 @@
 FROM python:3.9.5-alpine3.13
 # https://hub.docker.com/_/python
 
-ARG APP_VERSION=2.5
+ARG APP_VERSION=2.6
 
 # https://github.com/instrumenta/kubeval/releases
 ARG KUBEVAL_VERSION=0.16.1
 
 # https://github.com/kubernetes-sigs/kustomize/releases
-ARG KUSTOMIZE_VERSION=4.1.0
+ARG KUSTOMIZE_VERSION=4.1.3
 
 # https://github.com/open-policy-agent/conftest/releases
 ARG CONFTEST_VERSION=0.25.0
@@ -19,24 +19,24 @@ ARG CONFIG_LINT_VERSION=1.6.0
 ARG KUBE_SCORE_VERSION=1.11.0
 
 # https://github.com/FairwindsOps/polaris/releases
-ARG POLARIS_VERSION=3.2.1
+ARG POLARIS_VERSION=4.0.2
 
 # https://github.com/stackrox/kube-linter/releases
-ARG KUBE_LINTER_VERSION=0.2.1
+ARG KUBE_LINTER_VERSION=0.2.2
 
 # https://github.com/yannh/kubeconform/releases
 ARG KUBECONFORM_VERSION=0.4.7
 
 # https://github.com/Shopify/kubeaudit/releases
-ARG KUBEAUDIT_VERSION=0.14.0
+ARG KUBEAUDIT_VERSION=0.14.1
 
 # https://github.com/datreeio/datree/releases
-ARG DATREE_VERSION=0.1.382
+ARG DATREE_VERSION=0.1.431
 
 # split layers into distinct components
 # Install yamllint and kubectl via the alpine packages repositories
-RUN apk add --no-cache --upgrade bash ca-certificates curl tar yamllint \
-  && apk add kubectl --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted
+RUN apk add --no-cache --upgrade bash ca-certificates curl tar yamllint git \
+  && apk add kubectl helm --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted
 
 # Install Kubeval
 RUN  mkdir /tmp/kubeval \
@@ -126,7 +126,8 @@ RUN mkdir /tmp/datree \
   && unzip /tmp/datree/datree.zip -d /tmp/datree/ \
   && mv /tmp/datree/datree /usr/local/bin \
   && chmod +x /usr/local/bin/datree \
-  && rm -rf /tmp/datree 
+  && rm -rf /tmp/datree \
+  && helm plugin install https://github.com/datreeio/helm-datree
 
 CMD ["/bin/bash"]
 
