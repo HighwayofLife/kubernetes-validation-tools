@@ -33,15 +33,15 @@ Tools List
 | Helm        | 3.6.0    | CLI        | Helm helps you manage Kubernetes applications — define, install, and upgrade  Kubernetes applications as helm charts. Run as a validation tool, can be run as `helm lint`, or `helm template`. |
 | Yamllint    | 1.26.0   | Linter     | Basic linter for YAML files                                                       |
 | Kubeval     | 0.16.1   | Validation | Tool for validating a Kubernetes YAML manifests. Doesn't work with CRDs.          |
-| Kustomize   | 4.1.0    | Compile    | Template-free way to customize app configs. Useful to validate kustomize configs. |
+| Kustomize   | 4.1.3    | Compile    | Template-free way to customize app configs. Useful to validate kustomize configs. |
 | Config Lint | 1.6.0    | Validation | Validate config files using custom rules specified in YAML.                       |
 | Conftest    | 0.25.0   | Tests      | Utility to help you write tests against structured configuration data.            |
 | Kube Score  | 1.11.0   | Security   | Tool that performs **static code analysis** of Kubernetes object definitions.     |
-| Polaris     | 3.2.1    | Validation | Identifies Kubernetes deployment configuration errors                             |
-| Kube Linter | 0.2.1    | Security   | Linter and Static analysis tool that checks Kubernetes manifests                  |
+| Polaris     | 4.0.2    | Validation | Identifies Kubernetes deployment configuration errors                             |
+| Kube Linter | 0.2.2    | Security   | Linter and Static analysis tool that checks Kubernetes manifests                  |
 | Kubeconform | 0.4.7    | Validation | Kubernetes manifests validation tool like Kubeval with CRD support                |
-| Kubeaudit   | 0.14.0   | Security   | Audit clusters or manifest files for security concerns                            |
-| Datree      | 0.1.382  | Policy     | Ensure Kubernetes manifests and Helm charts are valid and follow your policies.   |
+| Kubeaudit   | 0.14.1   | Security   | Audit clusters or manifest files for security concerns                            |
+| Datree      | 0.1.431  | Policy     | Ensure Kubernetes manifests and Helm charts are valid and follow your policies.   |
 
 CI Examples
 -----------
