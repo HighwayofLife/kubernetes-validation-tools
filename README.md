@@ -3,7 +3,7 @@ Kubernetes Validation Tools
 
 An all-in-one collection of tools to run linting, common validation, static code analysis, security scanning, configuration tests, auditing, kustomize build, and dry run configuration for structured Kubernetes YAML Manifests. Designed to run in a CI (Continuious Integration) process as part of validation and testing, especially useful for Kubernetes clusters that are managed through GitOps.
 
-[![Docker](https://github.com/HighwayofLife/kubernetes-validation-tools/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/HighwayofLife/kubernetes-validation-tools/actions/workflows/docker-publish.yml)
+[![Docker](https://github.com/HighwayofLife/kubernetes-validation-tools/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/HighwayofLife/kubernetes-validation-tools/actions/workflows/docker-publish.yml) ![Docker Pulls](https://img.shields.io/docker/pulls/deck15/kubeval-tools?style=plastic)
 
 Why?
 ----
@@ -13,13 +13,17 @@ I wasn't able to find a single docker image that contained all of the major vali
 Usage
 -----
 
-Grab the latest image from [Github Packages](https://github.com/HighwayofLife?tab=packages&repo_name=kubernetes-validation-tools)
+Grab the latest image from [Github Packages](https://github.com/HighwayofLife?tab=packages&repo_name=kubernetes-validation-tools) or from [Docker Hub](https://hub.docker.com/r/deck15/kubeval-tools).
+
+You can run the image directly in docker, or see below for CI/CD usage examples.
 
 ```sh
-docker run --rm -it docker.pkg.github.com/highwayoflife/kubernetes-validation-tools/image:2.5 /bin/bash
+docker run --rm -it docker.pkg.github.com/highwayoflife/kubernetes-validation-tools/image:latest /bin/bash
 ```
 
-Ideally the kubeval-tools container should be used in a CI process to validate and lint Kubernetes configs and manifests. It's optimal to run these tools as part of a [GitOps](https://www.gitops.tech/) CI workflow.
+```sh
+docker run --rm -it deck15/kubeval-tools:latest /bin/bash
+```
 
 Tools List
 ----------
@@ -39,6 +43,106 @@ Tools List
 | Kubeaudit   | 0.14.0   | Security   | Audit clusters or manifest files for security concerns                            |
 | Datree      | 0.1.382  | Policy     | Ensure Kubernetes manifests and Helm charts are valid and follow your policies.   |
 
+CI Examples
+-----------
+
+Ideally the kubernetes-validation-tools container should be used in a CI build process to validate, scan, and lint Kubernetes configs and manifests or helm charts. It's optimal to run these tools as part of a [GitOps](https://www.gitops.tech/) Continuious Integration workflow.
+
+#### GitHub Actions Example
+Use the container specifier to run a step inside a container. Be sure to specify runs-on as the appropriate host environment for your container (ubuntu-latest for Linux containers, windows-latest for Windows containers). For example:
+
+```yaml
+jobs:
+  container:
+    runs-on: ubuntu-latest
+    container: deck15/kubeval-tools:latest
+    steps:
+      - run: |
+          kubeconform -summary manifests.yaml
+        name: Run in container
+```
+
+#### Jenkinsfile declarative example on Kubernetes
+This example is useful if Jenkins is running agents in a Kubernetes cluster: `Jenkinsfile`
+
+```groovy
+pipeline {
+  agent {
+    kubernetes {
+      cloud 'build-pipeline'
+        defaultContainer 'validate'
+        inheritFrom 'jnlp'
+        yaml """
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+  - name: validate
+    image: deck15/kubeval-tools:latest
+    command:
+      - cat
+    tty: true
+"""
+    } // kubernetes
+  } // agent
+
+  stages {
+    steps {
+      container('validate') {
+        sh 'kubeconform -summary manifests.yaml'
+      }
+    }
+  }
+}
+```
+
+#### Jenkinsfile declarative example using Docker agents
+
+```groovy
+pipeline {
+  agent {
+    docker { image 'deck15/kubeval-tools:latest' }
+  } // agent
+
+  ...
+}
+```
+
+#### Drone example: `.drone.yml`
+
+```yaml
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: validate
+  image: deck15/kubeval-tools:latest
+  commands:
+    - kubeconform -summary manifests.yaml
+```
+
+#### Circle-CI example: `.circleci/config.yml`
+
+```yaml
+version: 2.0
+jobs:
+  build:
+    docker:
+      - image: deck15/kubeval-tools:latest
+```
+
+#### Gitlab CI example: `.gitlab-ci.yaml`
+You can define an image that’s used for all jobs, and a list of services that you want to use during runtime:
+
+```yaml
+default:
+  image: deck15/kubeval-tools:latest
+
+validate:
+  script:
+    - kubeconform -summary manifests.yaml
+```
 Kubeaudit
 ---------
 [Kubeaudit](https://github.com/Shopify/kubeaudit) is a command line tool and a Go package to audit Kubernetes clusters for various different security concerns, such as:
@@ -55,6 +159,69 @@ KubeVal
 -------
 
 [kubeval](https://kubeval.instrumenta.dev/) is a tool for validating a Kubernetes YAML or JSON configuration file. It does so using schemas generated from the Kubernetes OpenAPI specification, and therefore can validate schemas for multiple versions of Kubernetes.
+
+KubeConform
+-----------
+
+[Kubeconform](https://github.com/yannh/kubeconform) is a Kubernetes manifests validation tool. Build it into your CI to validate your Kubernetes configuration!
+
+It is inspired by, contains code from and is designed to stay close to Kubeval, but with the following improvements:
+
+* high performance: will validate & download manifests over multiple routines, caching downloaded files in memory
+* configurable list of remote, or local schemas locations, enabling validating Kubernetes custom resources (CRDs) and offline validation capabilities
+* uses by default a self-updating fork of the schemas registry maintained by the kubernetes-json-schema project - which guarantees up-to-date schemas for all recent versions of Kubernetes.
+
+#### Usage examples
+Validating a single, valid file
+
+```sh
+kubeconform fixtures/valid.yaml
+echo $?
+0
+```
+
+Validating a single invalid file, setting output to json, and printing a summary
+
+```sh
+kubeconform -summary -output json fixtures/invalid.yaml
+{
+  "resources": [
+    {
+      "filename": "fixtures/invalid.yaml",
+      "kind": "ReplicationController",
+      "version": "v1",
+      "status": "INVALID",
+      "msg": "Additional property templates is not allowed - Invalid type. Expected: [integer,null], given: string"
+    }
+  ],
+  "summary": {
+    "valid": 0,
+    "invalid": 1,
+    "errors": 0,
+    "skipped": 0
+  }
+}
+
+echo $?
+1
+```
+
+Passing manifests via Stdin
+
+```sh
+cat fixtures/valid.yaml  | kubeconform -summary
+Summary: 1 resource found parsing stdin - Valid: 1, Invalid: 0, Errors: 0 Skipped: 0
+```
+
+Validating a folder, increasing the number of parallel workers
+
+```sh
+kubeconform -summary -n 16 fixtures
+fixtures/crd_schema.yaml - CustomResourceDefinition trainingjobs.sagemaker.aws.amazon.com failed validation: could not find schema for CustomResourceDefinition
+fixtures/invalid.yaml - ReplicationController bob is invalid: Invalid type. Expected: [integer,null], given: string
+[...]
+Summary: 65 resources found in 34 files - Valid: 55, Invalid: 2, Errors: 8 Skipped: 0
+```
 
 ConfTest
 --------
@@ -106,8 +273,10 @@ helm lint PATH [flags]
 ```
 
 #### helm template with kubeconform 
+
 ```sh
 helm template ./path/to/chart | kubeconform -strict -ignore-missing-schemas
+```
 
 Config-Lint
 -----------
@@ -161,6 +330,7 @@ polaris audit --format score
 ```
 
 Audits can run against a local directory or YAML file rather than a cluster:
+
 ```sh
 polaris audit --audit-path ./deploy/
 
