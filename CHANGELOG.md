@@ -1,3 +1,34 @@
+v2.6
+----
+### Features 🚀
+* 🚀 **[NEW]** Added **[Helm](https://github.com/helm/helm)** is a tool for managing Charts. Charts are packages of pre-configured Kubernetes resources.
+
+Use Helm to:
+
+* Lint and Validate your Helm Charts
+* Generate manifests from your Helm Chart Templates
+* Find and use popular software packaged as Helm Charts to run in Kubernetes
+* Share your own applications as Helm Charts
+* Create reproducible builds of your Kubernetes applications
+* Intelligently manage your Kubernetes manifest files
+* Manage releases of Helm packages
+
+* 🚀 **[NEW]** Added **[Datree](https://github.com/datreeio/datree)** is a CLI tool that helps prevent Kubernetes misconfigurations from reaching production. Datree is a CLI tool to ensure K8s manifests and Helm charts follow best practices as well as your organization’s policies.
+
+The Datree CLI integration provides a policy enforcement solution for Kubernetes to run automatic checks on every code change for rule violations and misconfigurations. When rule violations are found, Datree produces an alert which guides the developer to fix the issue inside the CI process — or even earlier as a pre-commit hook — while explaining the reason behind the rule.
+
+### Additions
+* Install Helm [v3.6.0](https://github.com/helm/helm/releases/tag/v3.6.0)
+* Install Datree [v0.1.431](https://github.com/datreeio/datree/releases/tag/0.1.431)
+* Install Datree Helm Plugin
+
+### Updates 📝
+* Kustomize from 4.1.0 to [4.1.3](https://github.com/kubernetes-sigs/kustomize/releases/tag/kustomize%2Fv4.1.3)
+* Polaris from 3.2.1 to [4.0.2](https://github.com/FairwindsOps/polaris/releases/tag/4.0.2)
+* KubeLinter from 0.2.1 to [0.2.2](https://github.com/stackrox/kube-linter/releases/tag/0.2.2)
+* KubeAudit from 0.14.0 to [0.14.1](https://github.com/Shopify/kubeaudit/releases/tag/v0.14.1)
+
+
 v2.5
 ----
 
