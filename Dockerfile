@@ -35,8 +35,8 @@ ARG DATREE_VERSION=0.1.431
 
 # split layers into distinct components
 # Install yamllint and kubectl via the alpine packages repositories
-RUN apk add --no-cache --upgrade bash ca-certificates curl tar yamllint \
-  && apk add kubectl --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted
+RUN apk add --no-cache --upgrade bash ca-certificates curl tar yamllint git \
+  && apk add kubectl helm --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/testing/ --allow-untrusted
 
 # Install Kubeval
 RUN  mkdir /tmp/kubeval \
