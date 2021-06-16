@@ -8,7 +8,7 @@ An all-in-one collection of tools to run linting, common validation, static code
 Why?
 ----
 
-I wasn't able to find a single docker image that contained all of the major validation tools (of which there are several!) to validate Kubernetes YAML manifest files as part of a CI/CD process before being automatically deployed to Kubernetes. This repo isn't designed to cover how to use these individual tools, but the links below should lead you to documentation for using each tool. We have found it useful to use several tools during our CI process because some check certain aspects that others cannot.
+I wasn't able to find a single docker image that contained all of the major validation tools (of which there are several!) to validate Kubernetes YAML manifest files as part of a CI/CD process before being automatically deployed to Kubernetes. This repo isn't designed to cover how to use these individual tools, though it does contain some basic usage examples. The links below should lead you to documentation for more details on using each tool. We have found it useful to use several tools during our CI validation and scanning process because some tools check certain aspects that others cannot.
 
 Usage
 -----
@@ -42,6 +42,7 @@ Tools List
 | Kubeconform | 0.4.7    | Validation | Kubernetes manifests validation tool like Kubeval with CRD support                |
 | Kubeaudit   | 0.14.1   | Security   | Audit clusters or manifest files for security concerns                            |
 | Datree      | 0.1.431  | Policy     | Ensure Kubernetes manifests and Helm charts are valid and follow your policies.   |
+| Kubesec     | 2.11.2   | Security   | Security risk analysis for Kubernetes resources |
 
 CI Examples
 -----------
@@ -372,6 +373,51 @@ datree test my-app/deployment.yaml
 #### Example with Helm
 ```sh
 helm datree test <CHART_DIRECTORY>
+```
+
+KubeSec
+-------
+
+[KubeScan](https://github.com/controlplaneio/kubesec) is a security scanning tool for Kubernetes pods, deployments, daemonsets and statefulsets.
+
+#### Example usage
+
+```sh
+kubesec scan manifest.yaml
+```
+
+#### Example output
+
+Kubesec returns a returns a JSON array, and can scan multiple YAML documents in a single input file.
+
+```json
+[
+  {
+    "object": "Pod/security-context-demo.default",
+    "valid": true,
+    "message": "Failed with a score of -30 points",
+    "score": -30,
+    "scoring": {
+      "critical": [
+        {
+          "selector": "containers[] .securityContext .capabilities .add == SYS_ADMIN",
+          "reason": "CAP_SYS_ADMIN is the most privileged capability and should always be avoided",
+          "points": -30
+        }
+      ],
+      "advise": [
+        {
+          "selector": "containers[] .securityContext .runAsNonRoot == true",
+          "reason": "Force the running image to run as a non-root user to ensure least privilege",
+          "points": 1
+        },
+        {
+          // ...
+        }
+      ]
+    }
+  }
+]
 ```
 
 Contributing
