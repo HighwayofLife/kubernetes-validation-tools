@@ -1,3 +1,12 @@
+v2.7 (Unreleased)
+-----------------
+### Features 🚀
+* 🚀 **[NEW]** Added **[KubeScan](https://github.com/controlplaneio/kubesec)**, a security scanning tool for Kubernetes pods, deployments, daemonsets and statefulsets.
+
+### Additions
+* Install Kubescan [v2.11.2](https://github.com/controlplaneio/kubesec/releases/tag/v2.11.2)
+
+
 v2.6
 ----
 ### Features 🚀

@@ -33,6 +33,9 @@ ARG KUBEAUDIT_VERSION=0.14.1
 # https://github.com/datreeio/datree/releases
 ARG DATREE_VERSION=0.1.431
 
+# https://github.com/controlplaneio/kubesec/releases
+ARG KUBESEC_VERSION=2.11.2
+
 # split layers into distinct components
 # Install yamllint and kubectl via the alpine packages repositories
 RUN apk add --no-cache --upgrade bash ca-certificates curl tar yamllint git \
@@ -128,6 +131,15 @@ RUN mkdir /tmp/datree \
   && chmod +x /usr/local/bin/datree \
   && rm -rf /tmp/datree \
   && helm plugin install https://github.com/datreeio/helm-datree
+
+# Install KubeSec (https://github.com/controlplaneio/kubesec)
+RUN mkdir /tmp/kubesec \
+  && curl -L -o /tmp/kubesec/kubesec.tar.gz \
+  https://github.com/controlplaneio/kubesec/releases/download/v${KUBESEC_VERSION}/kubesec_linux_amd64.tar.gz \
+  && tar -xzf /tmp/kubesec/kubesec.tar.gz -C /tmp/kubesec \
+  && mv /tmp/kubesec/kubesec /usr/local/bin \
+  && chmod +x /usr/local/bin/kubesec \
+  && rm -rf /tmp/kubesec
 
 CMD ["/bin/bash"]
 
