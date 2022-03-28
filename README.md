@@ -378,7 +378,7 @@ helm datree test <CHART_DIRECTORY>
 KubeSec
 -------
 
-[KubeScan](https://github.com/controlplaneio/kubesec) is a security scanning tool for Kubernetes pods, deployments, daemonsets and statefulsets.
+[KubeSec](https://github.com/controlplaneio/kubesec) is a security scanning tool for Kubernetes pods, deployments, daemonsets and statefulsets.
 
 #### Example usage
 
