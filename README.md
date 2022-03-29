@@ -29,20 +29,20 @@ Tools List
 ----------
 | Tool        | Version  | Purpose    | Description                                                                       |
 |-------------|----------|------------|-----------------------------------------------------------------------------------|
-| Kubectl     | 1.21.1   | CLI        | Kubernetes CLI. Can be used with `--dry-run=client` to validate manifests         |
-| Helm        | 3.6.0    | CLI        | Helm helps you manage Kubernetes applications — define, install, and upgrade  Kubernetes applications as helm charts. Run as a validation tool, can be run as `helm lint`, or `helm template`. |
-| Yamllint    | 1.26.0   | Linter     | Basic linter for YAML files                                                       |
+| Kubectl     | 1.23.5   | CLI        | Kubernetes CLI. Can be used with `--dry-run=client` to validate manifests         |
+| Helm        | 3.8.1    | CLI        | Helm helps you manage Kubernetes applications — define, install, and upgrade  Kubernetes applications as helm charts. Run as a validation tool, can be run as `helm lint`, or `helm template`. |
+| Yamllint    | 1.26.3   | Linter     | Basic linter for YAML files                                                       |
 | Kubeval     | 0.16.1   | Validation | Tool for validating a Kubernetes YAML manifests. Doesn't work with CRDs.          |
-| Kustomize   | 4.1.3    | Compile    | Template-free way to customize app configs. Useful to validate kustomize configs. |
+| Kustomize   | 4.5.3    | Compile    | Template-free way to customize app configs. Useful to validate kustomize configs. |
 | Config Lint | 1.6.0    | Validation | Validate config files using custom rules specified in YAML.                       |
-| Conftest    | 0.25.0   | Tests      | Utility to help you write tests against structured configuration data.            |
-| Kube Score  | 1.11.0   | Security   | Tool that performs **static code analysis** of Kubernetes object definitions.     |
-| Polaris     | 4.0.2    | Validation | Identifies Kubernetes deployment configuration errors                             |
-| Kube Linter | 0.2.2    | Security   | Linter and Static analysis tool that checks Kubernetes manifests                  |
-| Kubeconform | 0.4.7    | Validation | Kubernetes manifests validation tool like Kubeval with CRD support                |
-| Kubeaudit   | 0.14.1   | Security   | Audit clusters or manifest files for security concerns                            |
-| Datree      | 0.1.431  | Policy     | Ensure Kubernetes manifests and Helm charts are valid and follow your policies.   |
-| Kubesec     | 2.11.2   | Security   | Security risk analysis for Kubernetes resources |
+| Conftest    | 0.30.0   | Tests      | Utility to help you write tests against structured configuration data.            |
+| Kube Score  | 1.14.0   | Security   | Tool that performs **static code analysis** of Kubernetes object definitions.     |
+| Polaris     | 5.1.0    | Validation | Identifies Kubernetes deployment configuration errors                             |
+| Kube Linter | 0.2.6    | Security   | Linter and Static analysis tool that checks Kubernetes manifests                  |
+| Kubeconform | 0.4.13   | Validation | Kubernetes manifests validation tool like Kubeval with CRD support                |
+| Kubeaudit   | 0.16.0   | Security   | Audit clusters or manifest files for security concerns                            |
+| Datree      | 1.0.15   | Policy     | Ensure Kubernetes manifests and Helm charts are valid and follow your policies.   |
+| Kubesec     | 2.11.4   | Security   | Security risk analysis for Kubernetes resources                                   |
 
 CI Examples
 -----------
@@ -378,7 +378,7 @@ helm datree test <CHART_DIRECTORY>
 KubeSec
 -------
 
-[KubeScan](https://github.com/controlplaneio/kubesec) is a security scanning tool for Kubernetes pods, deployments, daemonsets and statefulsets.
+[KubeSec](https://github.com/controlplaneio/kubesec) is a security scanning tool for Kubernetes pods, deployments, daemonsets and statefulsets.
 
 #### Example usage
 

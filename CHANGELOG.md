@@ -1,11 +1,21 @@
-v2.7 (Unreleased)
------------------
+v2.7
+----
 ### Features 🚀
-* 🚀 **[NEW]** Added **[KubeScan](https://github.com/controlplaneio/kubesec)**, a security scanning tool for Kubernetes pods, deployments, daemonsets and statefulsets.
+* 🚀 **[NEW]** Added **[KubeSec](https://github.com/controlplaneio/kubesec)**, a Security risk analysis for Kubernetes Resources
 
 ### Additions
-* Install Kubescan [v2.11.2](https://github.com/controlplaneio/kubesec/releases/tag/v2.11.2)
+* Install Kubesec [v2.11.4](https://github.com/controlplaneio/kubesec/releases/tag/v2.11.4)
 
+### Updates 📝
+* Upgrade Python from 3.9 to 3.10
+* Upgrade Kustomize from 4.1.3 to 4.5.3
+* Upgrade Conftest from 0.25 to 0.30
+* Upgrade Kube Score from 1.11 to 1.14
+* Upgrade Polaris 4.0.2 to 5.1.0
+* Upgrade Kube Linter 0.2.2 to 0.2.6
+* Upgrade Kube Conform from 0.4.7 to 0.4.13
+* Upgrade Kube Audit from 0.14.1 to 0.16.0
+* Upgrade Datree from 0.1.431 to 1.0.15
 
 v2.6
 ----

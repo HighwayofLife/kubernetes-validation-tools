@@ -1,40 +1,40 @@
-FROM python:3.9.5-alpine3.13
+FROM python:3.10.4-alpine3.15
 # https://hub.docker.com/_/python
 
-ARG APP_VERSION=2.6
+ARG APP_VERSION=2.7
 
 # https://github.com/instrumenta/kubeval/releases
 ARG KUBEVAL_VERSION=0.16.1
 
 # https://github.com/kubernetes-sigs/kustomize/releases
-ARG KUSTOMIZE_VERSION=4.1.3
+ARG KUSTOMIZE_VERSION=4.5.3
 
 # https://github.com/open-policy-agent/conftest/releases
-ARG CONFTEST_VERSION=0.25.0
+ARG CONFTEST_VERSION=0.30.0
 
 # https://github.com/stelligent/config-lint/releases
 ARG CONFIG_LINT_VERSION=1.6.0
 
 # https://github.com/zegl/kube-score/releases
-ARG KUBE_SCORE_VERSION=1.11.0
+ARG KUBE_SCORE_VERSION=1.14.0
 
 # https://github.com/FairwindsOps/polaris/releases
-ARG POLARIS_VERSION=4.0.2
+ARG POLARIS_VERSION=5.1.0
 
 # https://github.com/stackrox/kube-linter/releases
-ARG KUBE_LINTER_VERSION=0.2.2
+ARG KUBE_LINTER_VERSION=0.2.6
 
 # https://github.com/yannh/kubeconform/releases
-ARG KUBECONFORM_VERSION=0.4.7
+ARG KUBECONFORM_VERSION=0.4.13
 
 # https://github.com/Shopify/kubeaudit/releases
-ARG KUBEAUDIT_VERSION=0.14.1
+ARG KUBEAUDIT_VERSION=0.16.0
 
 # https://github.com/datreeio/datree/releases
-ARG DATREE_VERSION=0.1.431
+ARG DATREE_VERSION=1.0.15
 
 # https://github.com/controlplaneio/kubesec/releases
-ARG KUBESEC_VERSION=2.11.2
+ARG KUBESEC_VERSION=2.11.4
 
 # split layers into distinct components
 # Install yamllint and kubectl via the alpine packages repositories
@@ -71,7 +71,7 @@ RUN mkdir /tmp/kubeconform \
 # Install Kubeaudit
 RUN mkdir /tmp/kubeaudit \
   && curl -L -o /tmp/kubeaudit/kubeaudit.tar.gz \
-  https://github.com/Shopify/kubeaudit/releases/download/v${KUBEAUDIT_VERSION}/kubeaudit_${KUBEAUDIT_VERSION}_linux_amd64.tar.gz \
+  https://github.com/Shopify/kubeaudit/releases/download/${KUBEAUDIT_VERSION}/kubeaudit_${KUBEAUDIT_VERSION}_linux_amd64.tar.gz \
   && tar -xzf /tmp/kubeaudit/kubeaudit.tar.gz -C /tmp/kubeaudit \
   && mv /tmp/kubeaudit/kubeaudit /usr/local/bin \
   && chmod +x /usr/local/bin/kubeaudit \
@@ -107,7 +107,7 @@ RUN mkdir /tmp/kube-score \
 # Install Polaris (https://github.com/FairwindsOps/polaris)
 RUN mkdir /tmp/polaris \
   && curl -L -o /tmp/polaris/polaris.tar.gz \
-  https://github.com/FairwindsOps/polaris/releases/download/${POLARIS_VERSION}/polaris_${POLARIS_VERSION}_linux_amd64.tar.gz \
+  https://github.com/FairwindsOps/polaris/releases/download/${POLARIS_VERSION}/polaris_linux_amd64.tar.gz \
   && tar -xzf /tmp/polaris/polaris.tar.gz -C /tmp/polaris \
   && mv /tmp/polaris/polaris /usr/local/bin \
   && chmod +x /usr/local/bin/polaris \
