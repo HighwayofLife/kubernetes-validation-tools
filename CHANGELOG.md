@@ -1,3 +1,17 @@
+v2.8
+----
+### Updates 📝
+* Upgrade Python from 3.10.4 to 3.10.11
+* Upgrade Kustomize from 4.5.3 to 5.0.1
+* Upgrade Conftest from 0.30 to 0.41.0
+* Upgrade Kube Score from 1.14 to 1.16.1
+* Upgrade Polaris 5.1.0 to 7.4.1
+* Upgrade Kube Linter 0.2.6 to 0.6.3
+* Upgrade Kube Conform from 0.4.13 to 0.6.1
+* Upgrade Kube Audit from 0.16.0 to 0.22.0
+* Upgrade Datree from 1.0.15 to 1.0.65
+* Upgrade KubeSec from 2.11.4 to 2.13.0
+
 v2.7
 ----
 ### Features 🚀
