@@ -1,40 +1,40 @@
-FROM python:3.10.4-alpine3.15
+FROM python:3.10.11-alpine3.17
 # https://hub.docker.com/_/python
 
-ARG APP_VERSION=2.7
+ARG APP_VERSION=2.8
 
 # https://github.com/instrumenta/kubeval/releases
 ARG KUBEVAL_VERSION=0.16.1
 
 # https://github.com/kubernetes-sigs/kustomize/releases
-ARG KUSTOMIZE_VERSION=4.5.3
+ARG KUSTOMIZE_VERSION=5.0.1
 
 # https://github.com/open-policy-agent/conftest/releases
-ARG CONFTEST_VERSION=0.30.0
+ARG CONFTEST_VERSION=0.41.0
 
 # https://github.com/stelligent/config-lint/releases
 ARG CONFIG_LINT_VERSION=1.6.0
 
 # https://github.com/zegl/kube-score/releases
-ARG KUBE_SCORE_VERSION=1.14.0
+ARG KUBE_SCORE_VERSION=1.16.1
 
 # https://github.com/FairwindsOps/polaris/releases
-ARG POLARIS_VERSION=5.1.0
+ARG POLARIS_VERSION=7.4.1
 
 # https://github.com/stackrox/kube-linter/releases
-ARG KUBE_LINTER_VERSION=0.2.6
+ARG KUBE_LINTER_VERSION=0.6.3
 
 # https://github.com/yannh/kubeconform/releases
-ARG KUBECONFORM_VERSION=0.4.13
+ARG KUBECONFORM_VERSION=0.6.1
 
 # https://github.com/Shopify/kubeaudit/releases
-ARG KUBEAUDIT_VERSION=0.16.0
+ARG KUBEAUDIT_VERSION=0.22.0
 
 # https://github.com/datreeio/datree/releases
-ARG DATREE_VERSION=1.0.15
+ARG DATREE_VERSION=1.8.65
 
 # https://github.com/controlplaneio/kubesec/releases
-ARG KUBESEC_VERSION=2.11.4
+ARG KUBESEC_VERSION=2.13.0
 
 # split layers into distinct components
 # Install yamllint and kubectl via the alpine packages repositories
@@ -71,7 +71,7 @@ RUN mkdir /tmp/kubeconform \
 # Install Kubeaudit
 RUN mkdir /tmp/kubeaudit \
   && curl -L -o /tmp/kubeaudit/kubeaudit.tar.gz \
-  https://github.com/Shopify/kubeaudit/releases/download/${KUBEAUDIT_VERSION}/kubeaudit_${KUBEAUDIT_VERSION}_linux_amd64.tar.gz \
+  https://github.com/Shopify/kubeaudit/releases/download/v${KUBEAUDIT_VERSION}/kubeaudit_${KUBEAUDIT_VERSION}_linux_amd64.tar.gz \
   && tar -xzf /tmp/kubeaudit/kubeaudit.tar.gz -C /tmp/kubeaudit \
   && mv /tmp/kubeaudit/kubeaudit /usr/local/bin \
   && chmod +x /usr/local/bin/kubeaudit \
@@ -116,7 +116,7 @@ RUN mkdir /tmp/polaris \
 # Install Kube Linter (https://github.com/stackrox/kube-linter)
 RUN mkdir /tmp/kube-linter \
   && curl -L -o /tmp/kube-linter/kube-linter.tar.gz \
-  https://github.com/stackrox/kube-linter/releases/download/${KUBE_LINTER_VERSION}/kube-linter-linux.tar.gz \
+  https://github.com/stackrox/kube-linter/releases/download/v${KUBE_LINTER_VERSION}/kube-linter-linux.tar.gz \
   && tar -xzf /tmp/kube-linter/kube-linter.tar.gz -C /tmp/kube-linter \
   && mv /tmp/kube-linter/kube-linter /usr/local/bin \
   && chmod +x /usr/local/bin/kube-linter \
